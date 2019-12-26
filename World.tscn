@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ShadedPoly.tscn" type="PackedScene" id=1]
+[ext_resource path="res://punch_spritesheet.png" type="Texture" id=2]
+[ext_resource path="res://SpriteShadow.gd" type="Script" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "idle"
+length = 1.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11 ]
+}
+
+[node name="World" type="Node2D"]
+
+[node name="ShadedPoly" parent="." instance=ExtResource( 1 )]
+position = Vector2( 180, 190 )
+polygon = PoolVector2Array( 30, 20, 30, -20, 30, -30, 0, -30, -10, -50, -10, -70, -30, -70, -30, 0, 0, 20 )
+
+[node name="ShadedPoly2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 360, 350 )
+polygon = PoolVector2Array( 10, 20, 20, 10, 80, 10, 80, -20, 20, -20, -10, -10, -20, 20, -20, 80, 10, 80 )
+
+[node name="ShadedPoly3" parent="." instance=ExtResource( 1 )]
+position = Vector2( 640, 320 )
+polygon = PoolVector2Array( 80, 10, 110, 10, 120, -30, 90, -50, 42.637, -8.68149, 20, -20, -10, -10, -20, 20, 10, 80 )
+
+[node name="ShadedSprite" type="Sprite" parent="."]
+position = Vector2( 340, 230 )
+texture = ExtResource( 2 )
+vframes = 3
+hframes = 4
+frame = 10
+
+[node name="SpriteShadow" type="Node2D" parent="ShadedSprite"]
+show_behind_parent = true
+z_index = -1
+z_as_relative = false
+script = ExtResource( 3 )
+num_shadow_sprites = 33
+shadow_start_color = Color( 0, 0.00392157, 0.129412, 1 )
+shadow_end_color = Color( 0.294118, 0.231373, 0.12549, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ShadedSprite"]
+autoplay = "idle"
+anims/idle = SubResource( 1 )

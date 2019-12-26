@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+void fragment()
+{
+	COLOR = vec4(step(0.9, texture(TEXTURE,UV).a));
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[node name="ShadowSprite" type="Sprite"]
+show_behind_parent = true
+material = SubResource( 2 )
